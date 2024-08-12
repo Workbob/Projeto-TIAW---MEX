@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="CSS/style.css">
+        <link rel="stylesheet" href="CSS/cadastrarprodutos.css">
+        <title>MEX</title>
+        <Script src="JS/login.js"></Script>
+        <script>
+            // Verifica se o usuário já esta logado e se negativo, redireciona para tela de login        
+            if (!usuarioCorrente.login) {
+                window.location.href = LOGIN_URL;
+            }
+        
+            function initPage() {
+    
+                // Associa a função de logout ao botão
+                document.getElementById('btn_logout').addEventListener('click', logoutUser);
+    
+                // Informa o nome do usuário logado
+                document.getElementById('nomeUsuario').innerHTML = usuarioCorrente.nome;
+                document.getElementById('Usuario').innerHTML = usuarioCorrente.login;
+            }
+    
+            // Associa ao evento de carga da página a função para verificar se o usuário está logado
+            window.addEventListener('load', initPage);
+        </script>
+    </head>
+    <body onload="imprimeDados()">
+        <!--CABEÇALHO NAV BAR -->
+        <header class="navbar sticky-top navbar-dark navBar static-top">
+            <img class="logo" src="IMG/logo.png" alt="Logo">
+            <h1 class="title">Multi Express</h1>
+            <div class="search">
+                <input type="text" id="pesquisa" name="pesquisa" placeholder="Pesquisar">
+            </div>
+            <p id="Usuario"></p>
+            <div class="buttons">
+                <h2><a class="navbar-brand" href="indexlog.html">Inicio</a></h2>
+                <h2><a class="navbar-brand" href="inicio.html">Menu</a></h2>
+                <h2><a class="navbar-brand" id="btn_logout" href="index.html">Sair</a></h2>
+            </div>
+        </header>
+
+        <!--CADASTRO DE PRODUTOS EM 2 COLUNAS-->
+        <!--1ª COLUNA-->
+        <h1>Olá <span id="nomeUsuario">, seja bem-vindo!</span></h1>
+
+    <h1 id="titulo">Cadastro de Produtos</h1>
+    <div class="container">
+              <div class="col">
+                    <div class="form-group">
+                    <label for="codigo">Código:</label>
+                    <input type="text" id="codigo" name="codigo" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="produto">Produto:</label>
+                    <input type="text" id="produto" name="produto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria">Categoria:</label>
+                    <input type="text" id="categoria" name="categoria" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="marca">Marca:</label>
+                    <input type="text" id="marca" name="marca" required>
+                </div>
+                          
+            </form>
+        </div>
+
+        <!--CADASTRO DE PRODUTOS EM 2 COLUNAS-->       
+        <!--2ª COLUNA-->
+
+        <div class="col">
+            <div class="form-group">
+                <label for="preco">Preço de Venda:</label>
+                <input type="text" id="preco" name="preco" required>
+            </div>
+
+            <div class="form-group">
+                <label for="estoque">Estoque:</label>
+                <input type="text" id="estoque" name="estoque" required>
+            </div>                  
+                         
+            <!--BOTÃO PARA ALTERAÇÕES NO CADASTRO DE PRODUTOS-->
+
+               <div class="buttons">
+                  <button id="buscar">Atualizar</button>
+                  <button id="cadastrar">Cadastrar</button>
+                  <button type="button" id="alterar">Alterar</button>
+                  <button id="excluir">Excluir</button>
+                  <button><a href="estoque.html">Estoque</a></button>
+               </div>
+
+            <!--INPUT COM INFORMAÇÕES DO PRODUTO-->   
+               <div class="input-group">
+                <span class="input-group-text"><input type="text" id="img" name="img" placeholder="link da imagem" required></span>
+                <textarea class="form-control" aria-label="With textarea" placeholder="Informações do Produto" id="detalhes"></textarea>
+              </div>
+        </div>
+    </div>
+    <div class="row" id="lista">
+        <div class="col-12">
+            <table id="grid-contatos" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Código</th>
+                        <th scope="col">Produto</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Preço</th>
+                        <th scope="col">Estoque</th>
+                        <th scope="col">Imagem</th>
+                        <th scope="col">Detalhes</th>
+                    </tr>
+                </thead>
+                <tbody id="table">
+                    <tr>
+                        <td scope="row"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <div id="tela">
+        
+    </div>
+</div>
+
+
+<!--Rodapé-->
+    <footer class="page-bottom fixed bg-danger">
+        <div class="container-footer">
+            <hr class="bg-hex" style="margin: 0 15%;">
+            <div class="row d-flex text-center justify-content-center  mb-md-0 mb-4 ">
+                <div class="col-md-8 col-12 mt-5">
+                    <p style="line-height: 1.7rem; color: white;">Multi Express <br>Contato: mex@gmail.com.br</p>
+                </div>
+            </div>
+            <hr class="clearfix d-md-none bg-white " style="margin: 10% 15% 5%;">
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3" style="color: white;">© 2019 Copyright: Bootstrap<br>
+            </div>
+            <br>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <Script src="JS/produto.js"></Script>
+    <script>
+            // Intercepta o click do botão Excluir
+            $("#excluir").click(function () {
+                let campoId = $("#codigo").val();
+                if (campoId == "") {
+                    displayMessage("Selecione um contato a ser excluído.");
+                    return;
+                }
+                deleteContato(parseInt(campoId));
+
+                // Reexibe os contatos
+                imprimeDados();
+
+                // Limpa o formulario
+                $("#form-contato")[0].reset();
+            });
+
+            // Intercepta o click do botão Alterar
+            $("#alterar").click(function () {
+                // Obtem os valores dos campos do formulário
+                let campoId = $("#codigo").val();
+                if (campoId == "") {
+                    displayMessage("Selecione um produto para ser alterado.");
+                    return;
+                }
+                let nome = $("#produto").val();
+                let categoria = $("#categoria").val();
+                let marca = $("#marca").val();
+                let preco = $("#preco").val();
+                let estoque = $("#estoque").val();
+                let imagem = $('#img').val();
+                let detalhes = $('#detalhes').val();
+                let produto = {
+                    nome: nome, 
+                    categoria: categoria, 
+                    marca: marca, 
+                    preco: preco, 
+                    estoque: estoque,
+                    img: imagem,
+                    detalhes: detalhes
+                };
+
+                updateContato(parseInt(campoId), produto);
+
+                // Reexibe os contatos
+                imprimeDados();
+
+                // Limpa o formulario
+                $(".form-group").reset();
+            });
+        
+        // Preenche o formulário quando o usuario clicar em uma linha da tabela 
+        $("#grid-contatos").on("click", "tr", function (e) {
+                let linhaContato = this;
+                colunas = linhaContato.querySelectorAll("td");
+
+                $("#codigo").val(colunas[1].innerText);
+                $("#produto").val(colunas[2].innerText);
+                $("#categoria").val(colunas[3].innerText);
+                $("#marca").val(colunas[4].innerText);
+                $("#preco").val(colunas[5].innerText);
+                $("#estoque").val(colunas[6].innerText);
+                $("#img").val(colunas[7].innerText);
+                $("#detalhes").val(colunas[8].innerText);
+            });
+    </script>
+
+
+</body>
+</html>
